@@ -3,7 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import ProductItem from "../components/ProductItem";
 import Title from "../components/Title";
-import { useAsyncError } from "react-router-dom";
+
 
 function Collections() {
   const { products,search,showSearch } = useContext(ShopContext);
@@ -70,12 +70,11 @@ function Collections() {
   },[sortType])
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
-      {/* FIler options*/}
+      {/* Filter options */}
       <div className="min-w-60">
         <p
           onClick={() => setShowFilter(!showFilter)}
-          className="my-2 text-xl flex items-center cursor-pointer gap-2"
-        >
+          className="my-2 text-xl flex items-center cursor-pointer gap-2">
           FILTERS
           <img
             className={`h-3 sm:hidden ${showFilter ? "rotate-90" : ""}`}
