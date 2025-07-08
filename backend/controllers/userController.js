@@ -98,5 +98,29 @@ const userLogin = async (req, res) => {
   }
 };
 
-const adminLogin = async (req, res) => {};
+const adminLogin = async (req, res) => {
+  try{
+    const {email,password}=req.body
+    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+      const token= jwt.sign(email+password,process.env.JWT_SECRET)
+
+      res.json({
+        success:true,
+        token
+      })
+    }else{
+      console.log("Invalid Credintials for admin login")
+      res.json({
+        success:false,
+        message:"Invalid Credintials for admin login"
+      })
+    }
+  }catch(err){
+    console.log(err)
+    res.json({
+      sucess:false,
+      message:"Something went wrong while admin login"
+    })
+  }
+};
 export { userLogin, userRegister, adminLogin };
