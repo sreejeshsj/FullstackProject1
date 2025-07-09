@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { assets } from '../assets/assets'
 import axios from 'axios'
 import { backendUrl } from '../App'
+import { toast } from 'react-toastify'
 function Add({token}) {
   const [image1,setImage1]=useState(false)
   const [image2,setImage2]=useState(false)
@@ -37,9 +38,27 @@ function Add({token}) {
               token
             }
           })
-          console.log(response)
+          
+          if(response.data.success){
+            toast.success(response.data.message)
+            setName("")
+          setPrice("")
+          setDescription("")
+          setBestseller(false)
+          setCategory('Men')
+          setSubCategory('Topwear')
+          setSizes([])
+          setImage1(false)
+          setImage2(false)
+          setImage3(false)
+          setImage4(false)
+          }else{
+            toast.error(response.data.message)
+          }
+          
         }catch(err){
           console.log(err)
+          console.log(err.message)
         }
   }
 
