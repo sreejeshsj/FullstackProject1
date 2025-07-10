@@ -1,5 +1,6 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import jwt from 'jsonwebtoken'
 //place order using COD method
 const placeOrder = async (req, res) => {
   try{
@@ -11,7 +12,7 @@ const placeOrder = async (req, res) => {
       address,
       paymentMethod:"COD",
       payment:false,
-      date:Date.now()
+      date:new Date().toISOString()
     }
 
     const newOrder= new orderModel(orderData)
@@ -42,7 +43,23 @@ const placeOrderRazorpay = async (req, res) => {};
 const allOrders = async (req, res) => {};
 
 //User order details for frontend
-const userOrders = async (req, res) => {};
+const userOrders = async (req, res) => {
+  const {userId}=req.body
+  console.log(userId)
+  try{
+    
+    const orderData=await orderModel.find({userId})
+    res.json({
+      success:true,
+      orderData
+    })
+  }catch(err){
+    res.json({
+      success:false,
+      message:err.message
+    })
+  }
+};
 
 //update order status from admin panel
 const updateStatus = async (req, res) => {};

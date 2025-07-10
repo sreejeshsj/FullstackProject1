@@ -31,7 +31,7 @@ const addProductController= async (req,res)=>{
             image:imageUrl,
             date: Date.now()
         })
-        console.log(product)
+        
 
         res.json({
             success:true,
@@ -55,7 +55,7 @@ const listProductController= async (req,res)=>{
 
     try{
         const product= await productModel.find()
-        console.log(product)
+        
         res.json({
             success:true,
             message:"Fetched Successfully",
